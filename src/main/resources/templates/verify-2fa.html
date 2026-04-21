@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Verify 2FA</title>
+</head>
+<body>
+
+<h2>Enter 2FA Code</h2>
+
+<form th:action="@{/verify-2fa}" method="post">
+    <div>
+        <label>Code:</label>
+        <input type="text" name="code"/>
+    </div>
+
+    ```
+    <button type="submit">Verify</button>
+    ```
+
+</form>
+
+<div th:if="${error}">
+    <p style="color:red;">Invalid code</p>
+</div>
+
+</body>
+</html>
