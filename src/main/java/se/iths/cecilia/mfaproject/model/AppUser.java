@@ -39,6 +39,12 @@ public class AppUser {
     @NotBlank(message = "You must select a role")
     private String role;
 
+    @Column(nullable = false, name = "allowsMFA")
+    private boolean allowsMFA;
+
+    @Column(nullable = true, name = "mfasecret")
+    private String secret;
+
     @Override
     public String toString() {
         return
