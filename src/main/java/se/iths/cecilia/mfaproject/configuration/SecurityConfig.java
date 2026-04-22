@@ -27,6 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/**").permitAll()
+                .requestMatchers("/home").authenticated()
         );
         http.formLogin(Customizer.withDefaults());
         http.logout(Customizer.withDefaults());
