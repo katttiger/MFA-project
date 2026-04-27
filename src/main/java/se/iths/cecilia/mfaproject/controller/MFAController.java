@@ -17,4 +17,5 @@ public class MFAController {
     public String getVerificationPage() {
         return "verify-2fa";
     }
+
 }

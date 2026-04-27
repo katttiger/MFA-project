@@ -3,19 +3,15 @@ package se.iths.cecilia.mfaproject.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authorization.EnableMultiFactorAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.authority.FactorGrantedAuthority;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import se.iths.cecilia.mfaproject.model.AppUser;
 
 @Configuration
-@EnableMultiFactorAuthentication(
-        authorities = {
-                FactorGrantedAuthority.PASSWORD_AUTHORITY
-        }
-)
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
     @Bean
@@ -26,10 +22,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/**").permitAll()
-                .requestMatchers("/home").authenticated()
+                .requestMatchers("/home", "/mfa").authenticated()
+                .anyRequest().permitAll()
         );
-        http.formLogin(Customizer.withDefaults());
+        http.formLogin(login -> login
+                .successHandler(
+                        (request, response, authentication) ->
+                        {
+                            AppUser user = (AppUser) authentication.getPrincipal();
+                            if (user.isAllowsMFA()) {
+                                response.sendRedirect("/mfa");
+                            } else {
+                                response.sendRedirect("/home");
+                            }
+
+                        })
+
+        );
         http.logout(Customizer.withDefaults());
         return http.build();
     }

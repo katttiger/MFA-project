@@ -8,13 +8,12 @@
 
 <h2>Register</h2>
 
-<form th:action="@{/register}" method="post">
+<form th:action="@{/registration}" method="post">
     <div>
         <label>Username:</label>
         <input type="text" name="username"/>
     </div>
 
-    ```
     <div>
         <label>Password:</label>
         <input type="password" name="password"/>
@@ -22,11 +21,10 @@
 
     <div>
         <label>Enable 2FA:</label>
-        <input type="checkbox" name="use2fa"/>
+        <input type="checkbox" name="allowsMFA"/>
     </div>
 
     <button type="submit">Register</button>
-    ```
 
 </form>
 
