@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scan QR</title>
+</head>
+<body>
+
+<h2>Scan this QR code</h2>
+
+<div>
+    <img th:src="'data:image/png;base64,' + ${qr}"/>
+</div>
+
+<p>Scan with your authenticator app, then continue to login.</p>
+
+<a th:href="@{/login}">Go to login</a>
+
+</body>
+</html>

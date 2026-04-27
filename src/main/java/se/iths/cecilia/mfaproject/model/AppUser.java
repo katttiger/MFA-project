@@ -32,25 +32,15 @@ public class AppUser {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "consent_given")
-    private boolean consent;
-
-    @Column(nullable = false, name = "role")
     @NotBlank(message = "You must select a role")
+    @Column(nullable = false, name = "role")
     private String role;
 
     @Column(nullable = false, name = "allowsMFA")
     private boolean allowsMFA;
 
     @Column(nullable = true, name = "mfasecret")
-    private String secret;
+    private String mfaSecret;
+    
 
-    @Override
-    public String toString() {
-        return
-                "id: " + id + "\n" +
-                        " username: " + username + "\n" +
-                        " cookies: " + consent + "\n" +
-                        " role: " + role + "\n";
-    }
 }
