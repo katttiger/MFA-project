@@ -6,5 +6,5 @@ import se.iths.cecilia.mfaproject.model.AppUser;
 
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-    AppUser findByEmail(String name);
+
 }
