@@ -30,6 +30,7 @@ public class SecurityConfig {
                         (request, response, authentication) ->
                         {
                             AppUser user = (AppUser) authentication.getPrincipal();
+                            assert user != null;
                             if (user.isAllowsMFA()) {
                                 response.sendRedirect("/mfa");
                             } else {
