@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "app_users")
+@Table(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,15 +32,11 @@ public class AppUser {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @NotBlank(message = "You must select a role")
-    @Column(nullable = false, name = "role")
-    private String role;
-
     @Column(nullable = false, name = "allowsMFA")
     private boolean allowsMFA;
 
-    @Column(nullable = true, name = "mfasecret")
+    @Column(nullable = true, name = "secret")
     private String mfaSecret;
-    
+
 
 }

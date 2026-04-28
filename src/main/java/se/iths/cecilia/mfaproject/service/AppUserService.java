@@ -16,13 +16,9 @@ public class AppUserService {
     private final PasswordEncoder passwordEncoder;
 
     public void addUser(AppUser appUser) {
-        if (appUser.getRole() == null) {
-            appUser.setRole("USER");
-        }
         if (appUser.isAllowsMFA()) {
             String secret = Base32.random();
             appUser.setMfaSecret(secret);
-
         }
         String passwordEncrypted = passwordEncoder.encode(appUser.getPassword());
         appUser.setPassword(passwordEncrypted);

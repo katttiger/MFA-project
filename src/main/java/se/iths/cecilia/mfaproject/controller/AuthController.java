@@ -30,6 +30,6 @@ public class AuthController {
     @PostMapping("/registration")
     public String registerUser(@ModelAttribute AppUser user) {
         appUserService.addUser(user);
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

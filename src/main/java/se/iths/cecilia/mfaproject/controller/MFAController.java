@@ -13,7 +13,7 @@ public class MFAController {
         return "qr";
     }
 
-    @GetMapping("/verify")
+    @GetMapping
     public String getVerificationPage() {
         return "verify-2fa";
     }
