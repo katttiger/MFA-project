@@ -8,15 +8,15 @@
 
 <h2>Register</h2>
 
-<form th:action="@{/registration}" method="post">
+<form th:action="@{/registration}" th:object="${user}" method="post">
     <div>
         <label>Username:</label>
-        <input type="text" name="username"/>
+        <input type="text" name="username" placeholder="Username"/>
     </div>
 
     <div>
         <label>Password:</label>
-        <input type="password" name="password"/>
+        <input type="password" name="password" placeholder="Password"/>
     </div>
 
     <div>
@@ -24,7 +24,7 @@
         <input type="checkbox" name="allowsMFA"/>
     </div>
 
-    <button type="submit">Register</button>
+    <button type="submit">Sign up</button>
 
 </form>
 
