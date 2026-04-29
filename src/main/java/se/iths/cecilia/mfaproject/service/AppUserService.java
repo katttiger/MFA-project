@@ -26,5 +26,7 @@ public class AppUserService {
         appUserRepository.save(appUser);
     }
 
-
+    public AppUser getUser(String username) {
+        return appUserRepository.findByUsername(username).orElseThrow();
+    }
 }
