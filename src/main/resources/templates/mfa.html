@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Verify 2FA</title>
+</head>
+<body>
+
+<h2>Enter 2FA Code</h2>
+
+
+<div th:if="${error}">
+    <p style="color:red;">Invalid code</p>
+</div>
+
+<p>Öppna din authenticator app och skanna QR_koden.</p>
+
+<img th:src="@{/mfa/qr(username=${username})}"/>
+<br/>
+
+<p>Skriv in den kod du fick</p>
+<form th:action="@{/mfa/verify}" method="post">
+    <input type="text" name="code" placeholder="Skriv in din kod"/>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
