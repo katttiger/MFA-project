@@ -38,17 +38,18 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomAuthorizationManager customAuthorizationManager) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/home", "/mfa").authenticated()
-                .anyRequest().permitAll()
+                .requestMatchers("/mfa/**").authenticated()
+                .requestMatchers("/registration", "/").permitAll()
+                .anyRequest().access(customAuthorizationManager)
         );
+
         http.formLogin(login -> login
                 .successHandler(
                         (request, response, authentication) ->
                         {
                             CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
-
                             if (user.isAllowsMFA()) {
                                 response.sendRedirect("/mfa");
                             } else {
@@ -59,6 +60,4 @@ public class SecurityConfig {
         http.logout(Customizer.withDefaults());
         return http.build();
     }
-
-
 }
